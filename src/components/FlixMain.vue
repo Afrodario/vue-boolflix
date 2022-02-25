@@ -1,12 +1,14 @@
 <template>
   <main>
-      <div v-for="(item, index) in movie"
-            :key="index"
-            class="card">
-          <h1>{{item.title}}</h1>
-          <h2>{{item.original_title}}</h2>
-          <h3>{{item.original_language}}</h3>
-          <h4>{{item.vote_average}}</h4>
+      <div class="container">
+        <div v-for="(item, index) in movie"
+                :key="index"
+                class="card">
+            <h1>{{item.title}}</h1>
+            <h2>{{item.original_title}}</h2>
+            <h3>{{item.original_language}}</h3>
+            <h4>Voto: {{item.vote_average}}</h4>
+        </div>
       </div>
   </main>
 </template>
@@ -23,13 +25,28 @@ export default {
 
 <style scoped lang="scss">
     main {
-        height: 100vh;
-        border: 1px solid black;
-        background-color: lightgrey;
+        background-color: gray;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
 
         .card {
-            border: 1px solid black;
             padding: 10px;
+            border: 1px solid black;
+            width: calc(100% / 4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            * {
+                padding: 10px 0;
+            }
         }
     }
 </style>

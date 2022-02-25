@@ -1,9 +1,12 @@
 <template>
   <header>
-    <input type="text"
-        v-model="inputSearch">
-    <button @click="$emit('search', inputSearch)"
-    >Cerca</button>
+    <div class="search-panel">
+        <input type="text"
+            placeholder="Cerca il tuo film preferito"
+            v-model="inputSearch">
+        <button @click="$emit('search', inputSearch)"
+        >Cerca</button>
+    </div>
   </header>
 </template>
 
@@ -25,5 +28,8 @@ export default {
         height: 100px;
         border: 1px solid black;
         background-color: red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 </style>
