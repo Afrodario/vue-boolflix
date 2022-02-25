@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <FlixHeader @search="startSearch"/>
-    <FlixMain/>
+    <FlixMain :movie="movieFound"/>
   </div>
 </template>
 
@@ -17,27 +17,22 @@ export default {
     FlixHeader,
     FlixMain
   },
+  data () {
+    return {
+      movieFound: ""
+    }
+  },
 
   methods: {
     startSearch(searchValue) {
       console.log("Il valore in arrivo dall'header: " + searchValue);
+      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=bd267c9a9d1968e91080897efd9d6526&query=${searchValue}&language=it-IT`).then((response) => {
+        console.log(response.data.results);
+        this.movieFound = response.data.results;
+
+      })
     }
   },
-
-  created() {
-    axios.get('https://api.themoviedb.org/3/search/movie?api_key=bd267c9a9d1968e91080897efd9d6526&query=buffy&language=it-IT')
-  .then((response) => {
-    // handle success
-    console.log(response);
-  })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  })
-  .then(function () {
-    // always executed
-  });
-  }
 }
 </script>
 
