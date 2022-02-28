@@ -16,8 +16,7 @@
                         <!-- Fine front -->
                         <!-- Inizio back -->
                         <div class="flip-card-back">
-                            <div class="card-details"
-                                :class="(index == display)?'active':''">
+                            <div class="card-details">
                                 <h1>{{item.title}}</h1>
                                 <h2>{{item.original_title}}</h2>
                                 <lang-flag :iso="item.original_language" />
@@ -37,13 +36,6 @@
                     </div>
                     <!-- Fine flip card inner -->
                 </div>
-
-                
-
-
-                
-
-
             </li>
         </ul>
     </div>
