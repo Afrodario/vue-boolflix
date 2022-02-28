@@ -23,19 +23,28 @@ export default {
     return {
       movieFound: [],
       seriesFound: [],
+      apiKey: "bd267c9a9d1968e91080897efd9d6526",
+      language: "it-IT"
     }
   },
 
-//TODO: inserire le chiamate axios come metodi computati
   methods: {
     startSearch(searchValue) {
+
+      const params = {
+        params: {
+          "api_key": this.apiKey,
+          "query": searchValue,
+          "language": this.language
+        }
+      }
       console.log("Il valore in arrivo dall'header: " + searchValue);
-      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=bd267c9a9d1968e91080897efd9d6526&query=${searchValue}&language=it-IT`).then((response) => {
+      axios.get('https://api.themoviedb.org/3/search/movie', params).then((response) => {
         console.log(response.data.results);
         this.movieFound = response.data.results;
 
       });
-      axios.get(`https://api.themoviedb.org/3/search/tv?api_key=bd267c9a9d1968e91080897efd9d6526&query=${searchValue}&language=it-IT`).then((response) => {
+      axios.get('https://api.themoviedb.org/3/search/tv', params).then((response) => {
         console.log(response.data.results);
         this.seriesFound = response.data.results;
 

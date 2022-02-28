@@ -1,12 +1,13 @@
 <template>
   <header>
-    <div class="search-panel">
+    <form class="search-panel">
         <input type="text"
             placeholder="Cerca il tuo film o la tua serie TV preferita"
             v-model="inputSearch">
-        <button @click="$emit('search', inputSearch)"
-        >Cerca</button>
-    </div>
+        <button type="submit" @click.prevent="$emit('search', inputSearch)">
+            Cerca
+        </button>
+    </form>
   </header>
 </template>
 
