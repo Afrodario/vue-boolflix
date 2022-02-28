@@ -2,7 +2,7 @@
   <header>
     <div class="search-panel">
         <input type="text"
-            placeholder="Cerca il tuo film preferito"
+            placeholder="Cerca il tuo film o la tua serie TV preferita"
             v-model="inputSearch">
         <button @click="$emit('search', inputSearch)"
         >Cerca</button>
@@ -24,12 +24,22 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../assets/style/common.scss";
     header {
         height: 100px;
-        border: 1px solid black;
-        background-color: red;
+        background-color: black;
         display: flex;
         align-items: center;
         justify-content: center;
+
+        input {
+            width: 400px;
+        }
+
+        input, button {
+            padding: 10px;
+            font-size: 20px;
+            text-align: center;
+        }
     }
 </style>

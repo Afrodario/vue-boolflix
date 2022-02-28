@@ -1,35 +1,45 @@
 <template>
   <main>
-      <div class="container">
-        <div v-for="(item, index) in movie"
-                :key="index"
-                class="card">
-            <h1>{{item.title}}</h1>
-            <h2>{{item.original_title}}</h2>
-            <h3>{{item.original_language}}</h3>
-            <h4>Voto: {{item.vote_average}}</h4>
-        </div>
-      </div>
+    <FlixMovies :infoMovie="movie"/>
+    <FlixSeries :infoSeries="series"/>
   </main>
 </template>
 
 <script>
+import FlixMovies from './partials/FlixMovies.vue'
+import FlixSeries from './partials/FlixSeries.vue'
+
 export default {
     name: "FlixMain",
     props: {
-        movie: Array
-    }
+        movie: Array,
+        series: Array
+    },
+    components: {
+        FlixMovies,
+        FlixSeries
+    },
+    data() {
+        return {
+        }
+    },
+    methods: {
+    },
 }
 
 </script>
 
 <style scoped lang="scss">
+@import "../assets/style/common.scss";
     main {
         background-color: gray;
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        ul.gallery {
             display: flex;
             flex-wrap: wrap;
         }
@@ -38,14 +48,11 @@ export default {
             padding: 10px;
             border: 1px solid black;
             width: calc(100% / 4);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             text-align: center;
 
-            * {
-                padding: 10px 0;
+            img {
+                width: 100%;
+                object-fit: contain;
             }
         }
     }
