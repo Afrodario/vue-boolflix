@@ -1,5 +1,6 @@
 <template>
   <header>
+    <h1 id="site-name">BOOLFLIX</h1>
     <form class="search-panel">
         <input type="text"
             placeholder="Cerca il tuo film o la tua serie TV preferita"
@@ -31,7 +32,8 @@ export default {
         background-color: black;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
+        padding: 0 15px;
 
         input {
             width: 400px;

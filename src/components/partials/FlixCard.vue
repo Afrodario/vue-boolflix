@@ -1,25 +1,43 @@
 <template>
-    <section>
-        <h1 class="main-title">SERIE TV</h1>
-        <div class="container">
-            <ul class="gallery">
-                <FlixCard v-for="(product, index) in infoSeries"
-                    :key="index"
-                    :product="product"/>
-            </ul>
-        </div>
-    </section>
+            <li class="card">
+                <div class="flip-card">
+                    <!-- Inizio flip card inner -->
+                    <div class="flip-card-inner">
+                        <!-- Inizio front -->
+                        <div class="flip-card-front">
+                            <img :src="'https://image.tmdb.org/t/p/w342/' + product.poster_path">
+                        </div>
+                        <!-- Fine front -->
+                        <!-- Inizio back -->
+                        <div class="flip-card-back">
+                            <div class="card-details">
+                                <h1>{{product.title ? product.title : product.name}}</h1>
+                                <h2>{{product.original_title ? product.original_title : product.original_name}}</h2>
+                                <lang-flag :iso="product.original_language" />
+                                <h4>Voto: {{product.vote_average}}</h4>
+                                <p>{{product.overview}}</p>
+
+                                <div class="rating"
+                                    v-for="(n, index) in 5"
+                                    :key="index">
+                                    <font-awesome-icon
+                                    :class="n <= Math.round(product.vote_average / 2)?'star-red':''"
+                                    :icon="Math.round(product.vote_average / 2) == 0?'fa-solid fa-ban':'fa-solid fa-star'"/>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fine back -->
+                    </div>
+                    <!-- Fine flip card inner -->
+                </div>
+            </li>
 </template>
 
 <script>
-import FlixCard from './FlixCard.vue'
 export default {
-    name: "FlixSeries",
+    name: "FlixCard",
     props: {
-        infoSeries: Array,
-    },
-    components: {
-        FlixCard
+        product: Object
     }
 }
 </script>

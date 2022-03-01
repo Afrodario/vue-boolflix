@@ -8,9 +8,21 @@ body {
     background-color: gray;
 }
 
-.flag-icon {
-    width: 20px;
+#site-name {
+    color: red;
+    font-size: 40px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+
+.main-title {
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    border: 1px solid black;
+    margin: 5px;
+    background-color: black;
+    color: red;
+} 
 
 ul {
     list-style: none;

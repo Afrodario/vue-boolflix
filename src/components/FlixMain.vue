@@ -1,6 +1,7 @@
 <template>
   <main>
-    <FlixMovies :infoMovie="movie"/>
+    <FlixMovies :infoMovie="movie"
+                :infoGenre="genre"/>
     <FlixSeries :infoSeries="series"/>
   </main>
 </template>
@@ -13,7 +14,8 @@ export default {
     name: "FlixMain",
     props: {
         movie: Array,
-        series: Array
+        series: Array,
+        genre: Array
     },
     components: {
         FlixMovies,
