@@ -20,7 +20,7 @@ export default {
     name: "FlixMovies",
     props: {
         infoMovie: Array,
-        infoGenre: Array
+        infoGenre: Array,
     },
     components: {
         FlixCard,

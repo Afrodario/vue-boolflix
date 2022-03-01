@@ -15,7 +15,7 @@ export default {
     props: {
         movie: Array,
         series: Array,
-        genre: Array
+        genre: Array,
     },
     components: {
         FlixMovies,

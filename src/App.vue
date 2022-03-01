@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <FlixHeader @search="startSearch"/>
+    <FlixHeader @search="startSearch"
+                @selectionEvt="getSelection"
+                :genre="allGenres"/>
     <FlixMain :movie="movieFound"
-              :series="seriesFound"
-              :genre="allGenres"/>
+              :series="seriesFound"/>
   </div>
 </template>
 
@@ -24,7 +25,14 @@ export default {
     return {
       movieFound: [],
       seriesFound: [],
+
       allGenres: [],
+
+      loopedGenres: [],
+
+      selectedGenres: [],
+      selectedMovies: [],
+
       genresFound: "",
       apiKey: "bd267c9a9d1968e91080897efd9d6526",
       language: "it-IT"
@@ -42,21 +50,28 @@ export default {
           "language": this.language
         }
       }
-      console.log("Il valore in arrivo dall'header: " + searchValue);
+      //console.log("Il valore in arrivo dall'header: " + searchValue);
       axios.get('https://api.themoviedb.org/3/search/movie', params).then((response) => {
-        console.log(response.data.results);
+        
         this.movieFound = response.data.results;
+        //console.log(this.movieFound[0].genre_ids);
 
-        this.filterGenre();
+        this.loopGenres();
 
       });
+
       axios.get('https://api.themoviedb.org/3/search/tv', params).then((response) => {
-        console.log(response.data.results);
+        //console.log(response.data.results);
         this.seriesFound = response.data.results;
 
       });
     },
-    // Funzione di
+
+    getSelection(selection) {
+      this.selectedGenres = selection;
+      console.log("Ho ricevuto:" + this.selectedGenres.id)
+    }
+
   },
 
   created() {
@@ -68,21 +83,29 @@ export default {
       }
       axios.get('https://api.themoviedb.org/3/genre/movie/list', paramsGenre).then((response) => {
         this.allGenres = response.data.genres;
-        console.log(this.allGenres);
+        console.log(response.data.genres);
 
       });
   },
 
   computed: {
-    filterGenre() {
+    loopGenres() {
       return this.movieFound.forEach(element => {
-        console.log("I generi trovati sono" + element.genre_ids);
-        this.genresFound = element.genre_ids;
-        console.log(this.genresFound);
-      })
-      // return this.movieFound.filter(item =>{
-      //   return item.
-      // })
+          console.log(element.genre_ids)
+          element.genre_ids.forEach(item =>{
+            this.loopedGenres.push(item)
+          })
+          console.log("Tutti i generi ciclati sono:" + this.loopedGenres)
+          this.filterGenres();
+        })
+      },
+
+    filterGenres() {
+      if (this.loopedGenres.includes(this.selectedGenres.id)) {
+        return console.log("VITTORIA")
+      } else {
+        return console.log("SCONFITTA")
+      }
     }
   }
 }
