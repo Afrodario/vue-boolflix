@@ -29,6 +29,7 @@ export default {
       allGenres: [],
 
       loopedGenres: [],
+      filteredGenres: [],
 
       selectedGenres: [],
       selectedMovies: [],
@@ -52,12 +53,15 @@ export default {
       }
       //console.log("Il valore in arrivo dall'header: " + searchValue);
       axios.get('https://api.themoviedb.org/3/search/movie', params).then((response) => {
+
+        if (this.selectedGenres == "Tutti i generi") {
+          this.movieFound = response.data.results;
+        } else {
+          this.loopedGenres = []
+          this.loopGenres();
+        }
         
-        this.movieFound = response.data.results;
         //console.log(this.movieFound[0].genre_ids);
-
-        this.loopGenres();
-
       });
 
       axios.get('https://api.themoviedb.org/3/search/tv', params).then((response) => {
@@ -70,7 +74,20 @@ export default {
     getSelection(selection) {
       this.selectedGenres = selection;
       console.log("Ho ricevuto:" + this.selectedGenres.id)
-    }
+    },
+
+    loopGenres() {
+      return this.movieFound.forEach(element => {
+          console.log(element.genre_ids);
+          if (element.genre_ids.includes(this.selectedGenres.id)) {
+            console.log("Il genere ci sta")
+            this.movieFound.push(element);
+            console.log("Ecco i film trovati: " + this.movieFound)
+          } else {
+            console.log("Il genere non ci sta")
+          }
+        })
+      },
 
   },
 
@@ -89,24 +106,6 @@ export default {
   },
 
   computed: {
-    loopGenres() {
-      return this.movieFound.forEach(element => {
-          console.log(element.genre_ids)
-          element.genre_ids.forEach(item =>{
-            this.loopedGenres.push(item)
-          })
-          console.log("Tutti i generi ciclati sono:" + this.loopedGenres)
-          this.filterGenres();
-        })
-      },
-
-    filterGenres() {
-      if (this.loopedGenres.includes(this.selectedGenres.id)) {
-        return console.log("VITTORIA")
-      } else {
-        return console.log("SCONFITTA")
-      }
-    }
   }
 }
 </script>

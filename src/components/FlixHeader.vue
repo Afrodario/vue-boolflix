@@ -3,6 +3,7 @@
     <h1 id="site-name">BOOLFLIX</h1>
     <select v-model="targetGenre"
     @change="$emit('selectionEvt', targetGenre)">
+        <option selected="Tutti i generi">Tutti i generi</option>
         <option v-for="(option, index) in genre"
                 :key="index"
                 :value="option">
