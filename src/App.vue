@@ -44,6 +44,13 @@ export default {
     // Funzione di ricerca
     startSearch(searchValue) {
 
+      this.getMovie(searchValue);
+      this.getTv(searchValue);
+
+    },
+
+    //Funzione di ricerca film
+    getMovie(searchValue) {
       const params = {
         params: {
           "api_key": this.apiKey,
@@ -51,26 +58,33 @@ export default {
           "language": this.language
         }
       }
-      //console.log("Il valore in arrivo dall'header: " + searchValue);
-      axios.get('https://api.themoviedb.org/3/search/movie', params).then((response) => {
-        
-          this.movieFound = response.data.results;
-        
-        //console.log(this.movieFound[0].genre_ids);
+        axios.get('https://api.themoviedb.org/3/search/movie', params).then((response) => {
+        this.movieFound = response.data.results;
       });
+    },
 
+    //Funzione di ricerca serie
+    getTv(searchValue) {
+      const params = {
+        params: {
+          "api_key": this.apiKey,
+          "query": searchValue,
+          "language": this.language
+        }
+      }
       axios.get('https://api.themoviedb.org/3/search/tv', params).then((response) => {
-        //console.log(response.data.results);
         this.seriesFound = response.data.results;
 
       });
     },
 
+    //Funzione di ricerca generi
     getSelection(selection) {
       this.selectedGenres = selection;
       console.log("Ho ricevuto:" + this.selectedGenres.id)
     },
 
+    //TODO - Funzione di filtraggio (incompleta)
     loopGenres() {
       this.movieFound.forEach(element => {
           console.log(element.genre_ids);
@@ -88,6 +102,7 @@ export default {
   },
 
   created() {
+      //Funzione di cattura dei generi
       const paramsGenre = {
         params: {
           "api_key": this.apiKey,
@@ -104,6 +119,7 @@ export default {
   computed: {
   }
 }
+
 </script>
 
 <style lang="scss">
