@@ -53,13 +53,8 @@ export default {
       }
       //console.log("Il valore in arrivo dall'header: " + searchValue);
       axios.get('https://api.themoviedb.org/3/search/movie', params).then((response) => {
-
-        if (this.selectedGenres == "Tutti i generi") {
+        
           this.movieFound = response.data.results;
-        } else {
-          this.loopedGenres = []
-          this.loopGenres();
-        }
         
         //console.log(this.movieFound[0].genre_ids);
       });
