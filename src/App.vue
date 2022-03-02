@@ -77,17 +77,18 @@ export default {
     },
 
     loopGenres() {
-      return this.movieFound.forEach(element => {
+      this.movieFound.forEach(element => {
           console.log(element.genre_ids);
           if (element.genre_ids.includes(this.selectedGenres.id)) {
             console.log("Il genere ci sta")
+            //PUNTO DA RIVEDERE
             this.movieFound.push(element);
             console.log("Ecco i film trovati: " + this.movieFound)
           } else {
             console.log("Il genere non ci sta")
           }
-        })
-      },
+      })
+    },
 
   },
 
